@@ -45,6 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 .montage-splitterCol {
     /-webkit-box-orient: vertical; /* old FlexBox */
     -webkit-flex-direction: column;
+    position: relative;
 }
 
 

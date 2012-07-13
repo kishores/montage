@@ -58,19 +58,19 @@ exports.Splitter = Montage.create(Component, {
             this.needsDraw = true;
         }
     },
-    
+
     minWidth: {
         value: null
     },
-    
+
     maxWidth: {
         value: null
     },
-    
+
     minHeight: {
         value: null
     },
-    
+
     maxHeight: {
         value: null
     },
@@ -254,10 +254,10 @@ exports.Splitter = Montage.create(Component, {
             return false;
         }
     },
-    
-    
+
+
     // Montage Callbacks
-    
+
     didCreate: {
         value: function() {
             this.minWidth = this.minWidth || 20; // min = 20%
@@ -271,16 +271,13 @@ exports.Splitter = Montage.create(Component, {
     prepareForDraw: {
         value: function() {
             this.element.classList.add('horizontal' === this.axis ? 'montage-splitterRow' : 'montage-splitterCol');
+
             this._wrapItems();
 
             if(this.resizable) {
                 this.containerWidth = this.element.offsetWidth; //1200;
                 this.containerHeight = this.element.offsetHeight;
-
-                this._handlePosition = this._getElementPosition(this._dragHandle);
-                console.log('handle position X,Y ', this._handlePosition.left, this._handlePosition.top);
                 this._percent = this._percent || 50;
-
                 var isHorizontal = (this.axis === 'horizontal');
 
                 if(isHorizontal) {
@@ -288,6 +285,7 @@ exports.Splitter = Montage.create(Component, {
                 } else {
                     this.handleY = this._dragHandle.offsetTop; //this._handlePosition.top;
                 }
+                console.log('handle X Y ', this.handleX, this.handleY);
                 this._composer = Montage.create(TranslateComposer);
                 this._composer.element = this._dragHandle;
                 this._composer.axis = this.axis || 'vertical'; //''horizontal' ;
@@ -301,6 +299,7 @@ exports.Splitter = Montage.create(Component, {
                         boundObjectPropertyPath: "translateX"
                     });
                 } else {
+
                     this._composer.minTranslateY = (this.minHeight/100) * this.containerHeight;
                     this._composer.maxTranslateY = (this.maxHeight/100) * this.containerHeight;
                     this._composer.translateY = this.handleY;
