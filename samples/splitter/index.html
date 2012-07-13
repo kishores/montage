@@ -37,130 +37,8 @@ POSSIBILITY OF SUCH DAMAGE.
     <meta charset="utf-8">
     <link rel="stylesheet" href="index.css">
 
-    <script src="../../montage.js" type="text/javascript"></script>
-
-    <script type="text/montage-serialization">
-        {
-
-            "rowSplitter": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "row-splitter"},
-                    "axis": "horizontal"
-                }
-            },
-
-
-            "colSplitter": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "col-splitter"},
-                    "axis": "vertical"
-                }
-            },
-
-            "nestedSplitter": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "nested-splitter"},
-                    "axis": "horizontal"
-                }
-            },
-
-            "nestedRowSplitter": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "nested-col-2"},
-                    "axis": "vertical"
-                }
-            },
-
-            "rowSplitterDrag": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "row-splitter-drag"},
-                    "axis": "horizontal",
-                    "resizable": true
-                }
-            },
-
-
-            "colSplitterDrag": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "col-splitter-drag"},
-                    "axis": "vertical",
-                    "resizable": true
-                }
-            },
-
-            "nestedSplitterDrag": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "nested-splitter-drag"},
-                    "axis": "horizontal",
-                    "resizable": true
-                }
-            },
-
-            "nestedRowSplitterDrag": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "nested-col-drag-2"},
-                    "axis": "vertical",
-                    "resizable": true
-                }
-            },
-
-
-            "jsfiddleTop": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "jsfiddle"},
-                    "axis": "vertical"
-                }
-            },
-            "jsfiddleMain": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "jsfiddle-main"},
-                    "axis": "horizontal",
-                    "resizable": true
-                }
-            },
-            "jsfiddleCode": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "jsfiddle-code"},
-                    "axis": "horizontal",
-                    "resizable": true
-                }
-            },
-            "jsfiddleCodeCol1": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "jsfiddle-code-col1"},
-                    "axis": "vertical",
-                    "resizable": true
-                }
-            },
-            "jsfiddleCodeCol2": {
-                "prototype": "montage/ui/splitter.reel",
-                "properties": {
-                    "element": {"#": "jsfiddle-code-col2"},
-                    "axis": "vertical",
-                    "resizable": true
-                }
-            }
-
-        }
-    </script>
-
-    <style>
-        div.container {
-            height: 200px;
-        }
-    </style>
+    <script src="../../montage.js" data-auto-package></script>
+    <link rel="serialization" type="text/montage-serialization" href="index.json">
 </head>
 
 <body>
@@ -170,7 +48,7 @@ POSSIBILITY OF SUCH DAMAGE.
         <span class="highlight">Splitter</span>
     </h1>
 
-    <p class="hint">It's based on the <span class="highlight">new FlexBox</span>, please test in <span class="highlight">Chrome 19+</span></p>
+    <p class="hint">Splits an element in half and lets a user drag to resize the cells.</p>
 
 
 

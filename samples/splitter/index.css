@@ -1,4 +1,4 @@
-/* @override http://localhost:8082/montage/lab/sandbox/ui/splitter/_example/index.css */
+/* @override http://localhost:8082/montage/samples/splitter/index.css */
 
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
@@ -101,3 +101,6 @@ body > .montage-splitterCol:not(.montage-splitterDraggable) {
     border-left: none;
 }
 
+.container {
+    height: 200px;
+}

@@ -1,9 +1,112 @@
 {
-    "splitter": {
-        "prototype": "montage/lab/sandbox/ui/splitter/splitter.reel",
+    "rowSplitter": {
+        "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "splitter"}
+            "element": {"#": "row-splitter"},
+            "axis": "horizontal"
+        }
+    },
+
+
+    "colSplitter": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "col-splitter"},
+            "axis": "vertical"
+        }
+    },
+
+    "nestedSplitter": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "nested-splitter"},
+            "axis": "horizontal"
+        }
+    },
+
+    "nestedRowSplitter": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "nested-col-2"},
+            "axis": "vertical"
+        }
+    },
+
+    "rowSplitterDrag": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "row-splitter-drag"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+
+
+    "colSplitterDrag": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "col-splitter-drag"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+
+    "nestedSplitterDrag": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "nested-splitter-drag"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+
+    "nestedRowSplitterDrag": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "nested-col-drag-2"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+
+
+    "jsfiddleTop": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "jsfiddle"},
+            "axis": "vertical"
+        }
+    },
+    "jsfiddleMain": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "jsfiddle-main"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    "jsfiddleCode": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "jsfiddle-code"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    "jsfiddleCodeCol1": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "jsfiddle-code-col1"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+    "jsfiddleCodeCol2": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "jsfiddle-code-col2"},
+            "axis": "vertical",
+            "resizable": true
         }
     }
-    
 }

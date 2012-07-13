@@ -1,3 +1,5 @@
+/* @override http://localhost:8082/montage/ui/splitter.reel/splitter.css */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -31,30 +33,36 @@ POSSIBILITY OF SUCH DAMAGE.
  
 .montage-splitterRow,
 .montage-splitterCol {
-    /display: -webkit-box; /* old FlexBox */
-    display: -webkit-flexbox;
-    
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-.montage-splitterRow {
-    /-webkit-box-orient: horizontal; /* old FlexBox */
-    -webkit-flex-direction: row;
-}
-
-.montage-splitterCol {
-    /-webkit-box-orient: vertical; /* old FlexBox */
-    -webkit-flex-direction: column;
-    position: relative;
 }
 
 
 /* Children */
 
 .montage-splitter-child {
-    /-webkit-box-flex: 1; /* old FlexBox */
-    -webkit-flex: 1 0 auto;
+    -moz-box-sizing: inherit;
     box-sizing: inherit;
+    vertical-align: top;
+}
+
+.montage-splitterRow > .montage-splitter-child {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+}
+
+.montage-splitterCol > .montage-splitter-child {
+    display: block;
+    width: 100%;
+    height: 50%;
+}
+
+
+/* Nested */
+
+.montage-splitter-child > .montage-splitterCol {
+    height: 100%;
 }
 
 
@@ -63,28 +71,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Draggable ---------------------------------- */
 
-
-.montage-splitterRow.montage-splitterDraggable,
-.montage-splitterCol.montage-splitterDraggable {
-    padding: 10px;
-    background-color: #f2f2f2;
-}
-
-/* Reset child that gets used as a new draggable parent */
-.montage-splitterDraggable > .montage-splitter-child.montage-splitterDraggable,
-.montage-splitterDraggable > .montage-splitter-child.montage-splitterDraggable {
-    padding: 0;
-}
-
 .montage-splitterDraggable > .montage-splitter-child {
     border: 1px solid #b3b3b3;
-    background-color: white;
-}
-
-/* Reset child that gets used as a new parent */
-.montage-splitterDraggable > .montage-splitterDraggable {
-    border: none;
-    background: none;
 }
 
 
@@ -109,12 +97,15 @@ POSSIBILITY OF SUCH DAMAGE.
 }
 
 .montage-splitterRow > .montage-splitter-thumb {
+    display: inline-block;
     width: 10px;
+    height: 100%;
     cursor: col-resize;
     background-position: -45px center;
 }
 
 .montage-splitterCol > .montage-splitter-thumb {
+    display: block;
     height: 10px;
     cursor: row-resize;
     background-position: center -15px;
