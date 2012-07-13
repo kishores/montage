@@ -46,8 +46,7 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/splitter.reel",
                 "properties": {
                     "element": {"#": "row-splitter"},
-                    "axis": "horizontal",
-                    "resizable": true
+                    "axis": "horizontal"
                 }
             },
 
@@ -56,8 +55,7 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/splitter.reel",
                 "properties": {
                     "element": {"#": "col-splitter"},
-                    "axis": "vertical",
-                    "resizable": true
+                    "axis": "vertical"
                 }
             },
 
@@ -65,8 +63,7 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/splitter.reel",
                 "properties": {
                     "element": {"#": "nested-splitter"},
-                    "axis": "horizontal",
-                    "resizable": true
+                    "axis": "horizontal"
                 }
             },
 
@@ -74,12 +71,96 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/splitter.reel",
                 "properties": {
                     "element": {"#": "nested-col-2"},
+                    "axis": "vertical"
+                }
+            },
+
+            "rowSplitterDrag": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "row-splitter-drag"},
+                    "axis": "horizontal",
+                    "resizable": true
+                }
+            },
+
+
+            "colSplitterDrag": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "col-splitter-drag"},
+                    "axis": "vertical",
+                    "resizable": true
+                }
+            },
+
+            "nestedSplitterDrag": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "nested-splitter-drag"},
+                    "axis": "horizontal",
+                    "resizable": true
+                }
+            },
+
+            "nestedRowSplitterDrag": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "nested-col-drag-2"},
+                    "axis": "vertical",
+                    "resizable": true
+                }
+            },
+
+
+            "jsfiddleTop": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "jsfiddle"},
+                    "axis": "vertical"
+                }
+            },
+            "jsfiddleMain": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "jsfiddle-main"},
+                    "axis": "horizontal",
+                    "resizable": true
+                }
+            },
+            "jsfiddleCode": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "jsfiddle-code"},
+                    "axis": "horizontal",
+                    "resizable": true
+                }
+            },
+            "jsfiddleCodeCol1": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "jsfiddle-code-col1"},
+                    "axis": "vertical",
+                    "resizable": true
+                }
+            },
+            "jsfiddleCodeCol2": {
+                "prototype": "montage/ui/splitter.reel",
+                "properties": {
+                    "element": {"#": "jsfiddle-code-col2"},
                     "axis": "vertical",
                     "resizable": true
                 }
             }
+
         }
     </script>
+
+    <style>
+        div.container {
+            height: 200px;
+        }
+    </style>
 </head>
 
 <body>
@@ -99,7 +180,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
     <h3>← Row →</h3>
 
-    <div data-montage-id="row-splitter">
+    <div data-montage-id="row-splitter" class="container">
         <div>1</div>
         <div>2</div>
     </div>
@@ -107,7 +188,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
     <h3>↓ Column ↑</h3>
 
-    <div data-montage-id="col-splitter" style="height: 300px;">
+    <div data-montage-id="col-splitter" class="container">
         <div>1</div>
         <div>2</div>
     </div>
@@ -116,7 +197,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
     <h3>Nested</h3>
 
-    <div data-montage-id="nested-splitter" style="height: 400px;">
+    <div data-montage-id="nested-splitter" class="container">
         <div data-montage-id="nested-col-1">
             <div>1</div>
         </div>
@@ -127,116 +208,36 @@ POSSIBILITY OF SUCH DAMAGE.
     </div>
 
 
-    <h3>Craaaaaazy!!!</h3>
-
-    <div class="montage-splitterRow">
-        <div class="montage-splitter-child">1</div>
-        <div class="montage-splitter-child montage-splitterCol">
-            <div class="montage-splitter-child">1</div>
-            <div class="montage-splitter-child">2</div>
-        </div>
-        <div class="montage-splitter-child montage-splitterCol">
-            <div class="montage-splitter-child montage-splitterRow">
-                <div class="montage-splitter-child">1</div>
-                <div class="montage-splitter-child">2</div>
-            </div>
-            <div class="montage-splitter-child montage-splitterRow">
-                <div class="montage-splitter-child">1</div>
-                <div class="montage-splitter-child">2</div>
-                <div class="montage-splitter-child">3</div>
-            </div>
-            <div class="montage-splitter-child montage-splitterRow">
-                <div class="montage-splitter-child">1</div>
-                <div class="montage-splitter-child">2</div>
-                <div class="montage-splitter-child">3</div>
-                <div class="montage-splitter-child">4</div>
-            </div>
-        </div>
-
-    </div>
-
-
-
     <h2>Draggable</h2>
-
-
 
     <h3>← Row →</h3>
 
-    <div class="montage-splitterRow montage-splitterDraggable">
-        <div class="montage-splitter-child">1</div>
-        <div class="montage-splitter-thumb"></div>
-        <div class="montage-splitter-child">2</div>
+    <div data-montage-id="row-splitter-drag" class="container">
+        <div>1</div>
+        <div>2</div>
     </div>
 
 
     <h3>↓ Column ↑</h3>
 
-    <div class="montage-splitterCol montage-splitterDraggable">
-        <div class="montage-splitter-child">1</div>
-        <div class="montage-splitter-thumb"></div>
-        <div class="montage-splitter-child">2</div>
+    <div data-montage-id="col-splitter-drag" class="container">
+        <div>1</div>
+        <div>2</div>
     </div>
 
 
 
     <h3>Nested</h3>
 
-    <div class="montage-splitterRow montage-splitterDraggable">
-        <div class="montage-splitter-child">1</div>
-        <div class="montage-splitter-thumb"></div>
-        <div class="montage-splitter-child montage-splitterCol montage-splitterDraggable">
-            <div class="montage-splitter-child">1</div>
-            <div class="montage-splitter-thumb"></div>
-            <div class="montage-splitter-child">2</div>
+    <div data-montage-id="nested-splitter-drag" class="container">
+        <div data-montage-id="nested-col-drag-1">
+            <div>1</div>
+        </div>
+        <div data-montage-id="nested-col-drag-2">
+            <div>1</div>
+            <div>2</div>
         </div>
     </div>
-
-
-    <h3>Craaaaaazy!!!</h3>
-
-    <div class="montage-splitterRow montage-splitterDraggable">
-        <div class="montage-splitter-child">1</div>
-
-        <div class="montage-splitter-thumb"></div>
-
-        <div class="montage-splitter-child montage-splitterCol montage-splitterDraggable">
-            <div class="montage-splitter-child">1</div>
-            <div class="montage-splitter-thumb"></div>
-            <div class="montage-splitter-child">2</div>
-        </div>
-
-        <div class="montage-splitter-thumb"></div>
-
-        <div class="montage-splitter-child montage-splitterCol montage-splitterDraggable">
-            <div class="montage-splitter-child montage-splitterRow montage-splitterDraggable">
-                <div class="montage-splitter-child">1</div>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child">2</div>
-            </div>
-            <div class="montage-splitter-thumb"></div>
-            <div class="montage-splitter-child montage-splitterRow montage-splitterDraggable">
-                <div class="montage-splitter-child">1</div>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child">2</div>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child">3</div>
-            </div>
-            <div class="montage-splitter-thumb"></div>
-            <div class="montage-splitter-child montage-splitterRow montage-splitterDraggable">
-                <div class="montage-splitter-child">1</div>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child">2</div>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child">3</div>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child">4</div>
-            </div>
-        </div>
-
-    </div>
-
-
 
 
     <h2>Mixed</h2>
@@ -245,52 +246,38 @@ POSSIBILITY OF SUCH DAMAGE.
 
     <h3>jsFiddle</h3>
 
-    <div class="montage-splitterCol">
-        <nav class="montage-splitter-child">Toolbar</nav>
-        <div class="montage-splitter-child montage-splitterRow">
-            <aside class="montage-splitter-child" style="-webkit-flex: 0 200px;">Side bar</aside>
-            <div class="montage-splitter-child">
-                <div class="montage-splitter-child montage-splitterRow montage-splitterDraggable">
-                    <div class="montage-splitter-child montage-splitterCol montage-splitterDraggable">
-                        <div class="montage-splitter-child">HTML</div>
-                        <div class="montage-splitter-thumb"></div>
-                        <div class="montage-splitter-child">JavaScript</div>
-                    </div>
-                    <div class="montage-splitter-thumb"></div>
-                    <div class="montage-splitter-child montage-splitterCol montage-splitterDraggable">
-                        <div class="montage-splitter-child">CSS</div>
-                        <div class="montage-splitter-thumb"></div>
-                        <div class="montage-splitter-child">Result</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div data-montage-id="jsfiddle" style="height: 400px;">
+        <nav data-montage-id="jsfiddle-nav" style="height: 30px;">
+            Navigation bar
+        </nav>
+        <section data-montage-id="jsfiddle-main">
+            <section data-montage-id="jsfiddle-sidebar">
+                Sidebar
+            </section>
+            <section data-montage-id="jsfiddle-code">
+
+                <section data-montage-id="jsfiddle-code-col1">
+                    <section data-montage-id="jsfiddle-code-html">
+                        HTML
+                    </section>
+                    <section data-montage-id="jsfiddle-code-css">
+                        CSS
+                    </section>
+                </section>
+
+                <section data-montage-id="jsfiddle-code-col2">
+                    <section data-montage-id="jsfiddle-code-js">
+                        Javascript
+                    </section>
+                    <section data-montage-id="jsfiddle-code-result">
+                        Result
+                    </section>
+                </section>
+
+            </section>
+        </section>
+
     </div>
-
-
-
-    <h3>Some App</h3>
-
-    <div class="montage-splitterCol">
-        <header class="montage-splitter-child">Menubar</header>
-        <div class="montage-splitter-child">
-            <div class="montage-splitter-child montage-splitterRow montage-splitterDraggable">
-                <aside class="montage-splitter-child" style="-webkit-flex: 0 300px;">List</aside>
-                <div class="montage-splitter-thumb"></div>
-                <div class="montage-splitter-child montage-splitterCol">
-                    <div class="montage-splitter-child">Toolbar</div>
-                    <div class="montage-splitter-child montage-splitterRow">
-                        <div class="montage-splitter-child">Preview</div>
-                        <div class="montage-splitter-child">Editor</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer class="montage-splitter-child">Footer</footer>
-    </div>
-
-
-
 
 </body>
 </html>

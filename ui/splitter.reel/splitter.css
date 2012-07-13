@@ -54,12 +54,7 @@ POSSIBILITY OF SUCH DAMAGE.
 .montage-splitter-child {
     /-webkit-box-flex: 1; /* old FlexBox */
     -webkit-flex: 1 0 auto;
-    /width: 50%;
     box-sizing: inherit;
-    transition:width 0.1s;
-    -moz-transition:width 0.1s; /* Firefox 4 */
-    -webkit-transition:width 0.1s; /* Safari and Chrome */
-    -o-transition:width 0.1s; /* Opera */
 }
 
 

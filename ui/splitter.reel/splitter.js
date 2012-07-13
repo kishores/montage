@@ -35,6 +35,8 @@ TranslateComposer = require("ui/composer/translate-composer").TranslateComposer;
 
 exports.Splitter = Montage.create(Component, {
 
+    // Public Properties for Splitter
+
     /** horizontal or vertical */
     _axis: {value: null},
     axis: {
@@ -59,24 +61,37 @@ exports.Splitter = Montage.create(Component, {
         }
     },
 
+    /**
+    * Width as a %. Number between 0 and 100
+    */
     minWidth: {
         value: null
     },
 
+    /**
+    * Width as a %. Number between 0 and 100
+    */
     maxWidth: {
         value: null
     },
 
+    /**
+    * Height as a %. Number between 0 and 100
+    */
     minHeight: {
         value: null
     },
 
+    /**
+    * Height as a %. Number between 0 and 100
+    */
     maxHeight: {
         value: null
     },
 
 
     // Private
+
     _composer: {value: null},
 
     _handlePositon: {value: null},
@@ -178,13 +193,12 @@ exports.Splitter = Montage.create(Component, {
        }
    },
 
+   // collection of wrappers Splitter creates for the child elements
     _wrappers: {
         value: null
     },
 
-
     _dragHandle: {value: null},
-
 
     _makeWrapper: {
         value: function(element) {
@@ -208,28 +222,6 @@ exports.Splitter = Montage.create(Component, {
         }
     },
 
-    _getElementPosition: {
-        value: function(obj) {
-            var curleft = 0, curtop = 0, curHt = 0, curWd = 0;
-            if (obj.offsetParent) {
-                do {
-                    curleft += obj.offsetLeft;
-                    curtop += obj.offsetTop;
-                    curHt += obj.offsetHeight;
-                    curWd += obj.offsetWidth;
-                } while ((obj = obj.offsetParent));
-            }
-            return {
-                top: curtop,
-                left: curleft,
-                height: curHt,
-                width: curWd
-            };
-            //return [curleft,curtop, curHt, curWd];
-
-        }
-    },
-
     _wrapItems: {
         value: function() {
             var childNodes = Array.prototype.slice.call(this.element.children, 0);
@@ -246,6 +238,11 @@ exports.Splitter = Montage.create(Component, {
         }
     },
 
+
+    // ---------------------------------------
+    // Montage Lifecycle and Event Callbacks
+    // --------------------------------------
+
     /** Translate Composer requirement */
     surrenderPointer: {
         value: function(pointer, composer) {
@@ -254,9 +251,6 @@ exports.Splitter = Montage.create(Component, {
             return false;
         }
     },
-
-
-    // Montage Callbacks
 
     didCreate: {
         value: function() {
@@ -342,7 +336,7 @@ exports.Splitter = Montage.create(Component, {
                 console.log('draw  = ', this._percent);
                 var percent = this._percent + '%';
                 if("horizontal" === this.axis) {
-                    wrapper.style.width = percent;
+                    wrapper.style.width = percent; //this.handleX + 'px'; percent;
                 } else {
                     wrapper.style.height = this.handleY + 'px'; //percent;
                 }
