@@ -258,6 +258,7 @@ exports.Splitter = Montage.create(Component, {
             this.maxWidth = this.maxWidth || 80; // max = 80%
             this.minHeight = this.minHeight || 20;
             this.maxHeight = this.maxHeight || 80;
+            this._percent = this._percent || 50;
         }
     },
 
@@ -269,17 +270,26 @@ exports.Splitter = Montage.create(Component, {
             this._wrapItems();
 
             if(this.resizable) {
-                this.containerWidth = this.element.offsetWidth; //1200;
+                this.containerWidth = this.element.offsetWidth;
                 this.containerHeight = this.element.offsetHeight;
-                this._percent = this._percent || 50;
+
                 var isHorizontal = (this.axis === 'horizontal');
 
+                var percent;
                 if(isHorizontal) {
                     this.handleX = this._dragHandle.offsetLeft; //this._handlePosition.left;
+                    this._percent = this.handleX/this.containerWidth * 100;
                 } else {
                     this.handleY = this._dragHandle.offsetTop; //this._handlePosition.top;
+                    this._percent = this.handleY/this.containerHeight * 100;
                 }
-                console.log('handle X Y ', this.handleX, this.handleY);
+
+                if(!this._percent) {
+                    this._percent = 50;
+                }
+                console.log('handle X Y ', this.handleX, this.handleY, this._percent);
+
+
                 this._composer = Montage.create(TranslateComposer);
                 this._composer.element = this._dragHandle;
                 this._composer.axis = this.axis || 'vertical'; //''horizontal' ;
@@ -330,16 +340,23 @@ exports.Splitter = Montage.create(Component, {
     draw: {
         value: function() {
             if(this.resizable) {
-                var wrapper = this._wrappers[0];
-                // if we provide inline width, set the webkit-flex to none
-                wrapper.style['-webkit-flex'] = 'none';
-                console.log('draw  = ', this._percent);
-                var percent = this._percent + '%';
-                if("horizontal" === this.axis) {
-                    wrapper.style.width = percent; //this.handleX + 'px'; percent;
-                } else {
-                    wrapper.style.height = this.handleY + 'px'; //percent;
+
+                if(this._wrappers.length > 1) {
+                    var wrapper = this._wrappers[0];
+                    // if we provide inline width, set the webkit-flex to none
+                    //wrapper.style['-webkit-flex'] = 'none';
+                    console.log('draw  = ', this._percent);
+                    var percent = this._percent + '%';
+                    if("horizontal" === this.axis) {
+                        wrapper.style.width = percent; //this.handleX + 'px'; percent;
+                        this._wrappers[1].style.width = (100- this._percent) + '%';
+                    } else {
+                        wrapper.style.height = percent;
+                        this._wrappers[1].style.height = (100- this._percent) + '%';
+                    }
+
                 }
+
 
             }
 
