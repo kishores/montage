@@ -78,27 +78,10 @@ h3 {
 
 /* Splitter ----------------------------------- */
 
-/* Those styles below are not part of the splitter.reel */
-.montage-splitter-child:not(.montage-splitterRow):not(.montage-splitterCol) {
+/* Those styles below are not part of the splitter.reel and just used in the example */
+.montage-splitter-child {
     text-align: center;
     line-height: 50px;
-    background: hsla(0,0%,100%,.5);
-    border-top: 1px solid hsla(0,0%,0%,.3);
-    border-left: 1px solid hsla(0,0%,0%,.3);
-}
-
-body > .montage-splitterRow:not(.montage-splitterDraggable),
-body > .montage-splitterCol:not(.montage-splitterDraggable) {
-    border-right: 1px solid hsla(0,0%,0%,.3);
-    border-bottom: 1px solid hsla(0,0%,0%,.3);
-}
-
-
-/* Reset for draggable */
-.montage-splitterDraggable > .montage-splitter-child.montage-splitterRow,
-.montage-splitterDraggable > .montage-splitter-child.montage-splitterCol {
-    border-top: none;
-    border-left: none;
 }
 
 .container {
