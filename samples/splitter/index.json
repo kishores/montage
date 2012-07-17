@@ -72,50 +72,105 @@
     
     
     
-    "mixed": {
+    "multiRow": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "mixed"},
+            "element": {"#": "multiRow"},
             "axis": "horizontal",
             "resizable": true
         }
     },
-    "mixed1": {
+    "multiRow1": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "mixed1"},
+            "element": {"#": "multiRow1"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    "multiRow2": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "multiRow2"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    
+    
+    
+    "multiCol": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "multiCol"},
             "axis": "vertical",
             "resizable": true
         }
     },
-    "mixed2": {
+    "multiCol1": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "mixed2"},
+            "element": {"#": "multiCol1"},
             "axis": "vertical",
             "resizable": true
         }
     },
-    "mixed21": {
+    "multiCol2": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "mixed21"},
+            "element": {"#": "multiCol2"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+    
+    
+    
+    
+    "deep": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "deep"},
             "axis": "horizontal",
             "resizable": true
         }
     },
-    "mixed22": {
+    "deep1": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "mixed22"},
+            "element": {"#": "deep1"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+    "deep2": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "deep2"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+    "deep21": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "deep21"},
             "axis": "horizontal",
             "resizable": true
         }
     },
-    "mixed222": {
+    "deep22": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "mixed222"},
+            "element": {"#": "deep22"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    "deep222": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "deep222"},
             "axis": "vertical",
             "resizable": true
         }

@@ -83,11 +83,15 @@ POSSIBILITY OF SUCH DAMAGE.
     border-bottom: none;
 }
 
-.montage-splitter-child > .montage-splitterCol > .montage-splitter-child {
+.montage-splitter-child > .montage-splitterCol > .montage-splitter-child,
+.montage-splitter-child > .montage-splitterRow > .montage-splitter-child {
     border: none;
 }
 .montage-splitter-child > .montage-splitterCol > .montage-splitter-child:first-child {
     border-bottom: 1px solid hsl(0,0%,70%);
+}
+.montage-splitter-child > .montage-splitterRow > .montage-splitter-child:first-child {
+    border-right: 1px solid hsl(0,0%,70%);
 }
 
 
