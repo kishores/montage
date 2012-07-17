@@ -89,89 +89,57 @@ exports.Splitter = Montage.create(Component, {
         value: null
     },
 
+    _percent: {value: null},
+    percent: {
+        get: function() {
+            return this._percent;
+        },
+        set: function(value) {
+            this._percent = String.isString(value) ? parseFloat(value) : value;
+            this.needsDraw = true;
+        }
+
+    },
+
 
     // Private
 
     _composer: {value: null},
-
-    _handlePositon: {value: null},
-
-    _handleX: {value: null},
-    handleX: {
-        serializable: true,
+    
+    __handleX: {value: null},
+    _handleX: {
         get: function() {
-            return this._handleX;
+            return this.__handleX;
         },
         set: function(value) {
-            console.log('new handleposition x  - ' , value);
-            this._handleX = value;
-
-            if(!this._synching) {
-                this._synching = true;
-                this._percent = (value/this.containerWidth)*100;
-                console.log('percent ', this._percent);
-                this._synching = false;
-            }
-
-            this.needsDraw = true;
+            this.__handleX = value;
+            this._calculatePercentFromPosition();
         }
-   },
+    },
 
-    _handleY: {value: null},
-    handleY: {
-        serializable: true,
+    __handleY: {value: null},
+    _handleY: {
         get: function() {
-            return this._handleY;
+            return this.__handleY;
         },
         set: function(value) {
-            console.log('new handleposition y  - ' , value);
-            this._handleY = value;
-
-            if(!this._synching) {
-                this._synching = true;
-                this._percent = (value/this.containerHeight)*100;
-                console.log('percent ', this._percent);
-                this._synching = false;
-            }
-
-            this.needsDraw = true;
+            this.__handleY = value;
+            this._calculatePercentFromPosition();
         }
-   },
+    },
 
-   __percent: {
-       value: null
-   },
-   _percent: {
-         get: function() {
-             return this.__percent;
-         },
-         set: function(value) {
-             this.__percent = value;
-             if(!this._synching) {
-                 this._calculatePositionFromPercent();
-                 this.needsDraw = true;
-             }
-         }
-     },
+    _calculatePercentFromPosition: {
+        value: function() {
+            var isHorizontal = (this.axis === 'horizontal');
+            if(isHorizontal) {
+                this.percent = (this._handleX/this.containerWidth) * 100;
+            } else {
+                this.percent = (this._handleY/this.containerHeight) * 100;
 
+            }
+        }
+    },
 
-     _synching: {value: null},
-     _calculatePositionFromPercent:{
-         value: function() {
-             this._synching = true;
-             if("horizontal" === this.axis) {
-                 var x = ((this._percent||0)/100) * this.containerWidth;
-                 this.handleX = x;
-                 console.log('calculate X from percent ', this.handleX);
-             } else {
-                 var y = ((this._percent||0)/100) * this.containerHeight;
-                 this.handleY = y;
-                 console.log('calculate Y from percent ', this.handleY);
-             }
-
-             this._synching = false;
-         }
-     },
 
    _containerWidth: {value: null},
    containerWidth: {
@@ -192,6 +160,8 @@ exports.Splitter = Montage.create(Component, {
            this._containerHeight = value;
        }
    },
+
+   _initialDraw: {value: true},
 
    // collection of wrappers Splitter creates for the child elements
     _wrappers: {
@@ -258,7 +228,46 @@ exports.Splitter = Montage.create(Component, {
             this.maxWidth = this.maxWidth || 80; // max = 80%
             this.minHeight = this.minHeight || 20;
             this.maxHeight = this.maxHeight || 80;
-            this._percent = this._percent || 50;
+            this.percent = this.percent || 50;
+        }
+    },
+
+    _calculateInitialHandlePosition: {
+        value: function() {
+            var isHorizontal = (this.axis === 'horizontal');
+
+            if(this.resizable) {
+                this.containerWidth = this.element.offsetWidth;
+                this.containerHeight = this.element.offsetHeight;
+
+                if(isHorizontal) {
+                    this._handleX = this._dragHandle.offsetLeft;
+                } else {
+                    this._handleY = this._dragHandle.offsetTop;
+                }
+                //console.log('handle X Y ', this._handleX, this._handleY, this.percent);
+            }
+        }
+    },
+
+    _initializeComposer: {
+        value: function() {
+            var isHorizontal = (this.axis === 'horizontal');
+
+            this._composer = Montage.create(TranslateComposer);
+            this._composer.element = this._dragHandle;
+            this._composer.axis = this.axis || 'vertical';
+
+            if(isHorizontal) {
+                this._composer.minTranslateX = ((this.minWidth/100) * this.containerWidth);
+                this._composer.maxTranslateX = (this.maxWidth/100) * this.containerWidth;
+                this._composer.translateX = this._handleX;
+            } else {
+                this._composer.minTranslateY = (this.minHeight/100) * this.containerHeight;
+                this._composer.maxTranslateY = (this.maxHeight/100) * this.containerHeight;
+                this._composer.translateY = this._handleY;
+            }
+            this._composer.load();
         }
     },
 
@@ -266,102 +275,90 @@ exports.Splitter = Montage.create(Component, {
     prepareForDraw: {
         value: function() {
             this.element.classList.add('horizontal' === this.axis ? 'montage-splitterRow' : 'montage-splitterCol');
-
             this._wrapItems();
-
-            if(this.resizable) {
-                this.containerWidth = this.element.offsetWidth;
-                this.containerHeight = this.element.offsetHeight;
-
-                var isHorizontal = (this.axis === 'horizontal');
-
-                var percent;
-                if(isHorizontal) {
-                    this.handleX = this._dragHandle.offsetLeft; //this._handlePosition.left;
-                    this._percent = this.handleX/this.containerWidth * 100;
-                } else {
-                    this.handleY = this._dragHandle.offsetTop; //this._handlePosition.top;
-                    this._percent = this.handleY/this.containerHeight * 100;
-                }
-
-                if(!this._percent) {
-                    this._percent = 50;
-                }
-                console.log('handle X Y ', this.handleX, this.handleY, this._percent);
-
-
-                this._composer = Montage.create(TranslateComposer);
-                this._composer.element = this._dragHandle;
-                this._composer.axis = this.axis || 'vertical'; //''horizontal' ;
-
-                if(isHorizontal) {
-                    this._composer.minTranslateX = ((this.minWidth/100) * this.containerWidth);
-                    this._composer.maxTranslateX = (this.maxWidth/100) * this.containerWidth;
-                    this._composer.translateX = this.handleX;
-                    Object.defineBinding(this, "handleX", {
-                        boundObject: this._composer,
-                        boundObjectPropertyPath: "translateX"
-                    });
-                } else {
-
-                    this._composer.minTranslateY = (this.minHeight/100) * this.containerHeight;
-                    this._composer.maxTranslateY = (this.maxHeight/100) * this.containerHeight;
-                    this._composer.translateY = this.handleY;
-                    Object.defineBinding(this, "handleY", {
-                        boundObject: this._composer,
-                        boundObjectPropertyPath: "translateY"
-                    });
-                }
-                this._composer.load();
-            }
         }
     },
 
-    /*
+
     prepareForActivationEvents: {
         value: function() {
             this._composer.addEventListener('translateStart', this, false);
+            this._composer.addEventListener('translate', this, false);
             this._composer.addEventListener('translateEnd', this, false);
         }
     },
 
+    _startTranslate: {
+        enumerable: false,
+        value: null
+    },
+
+    _startPosition: {
+        enumerable: false,
+        value: null
+    },
+
     handleTranslateStart: {
         value: function(e) {
+            var isHorizontal = (this.axis === 'horizontal');
+            this._startTranslate = (isHorizontal ? e.translateX : e.translateY);
+            this._startPosition = (isHorizontal ? this._handleX : this._handleY);
+
+            this._valueSyncedWithPosition = false;
+        }
+    },
+
+    handleTranslate: {
+        value: function (event) {
+            var isHorizontal = (this.axis === 'horizontal');
+            if(isHorizontal) {
+                var x = this._startPosition + event.translateX - this._startTranslate;
+                if (x < 0) {
+                    x = 0;
+                } else {
+                    if (x > this._containerWidth) {
+                        x = this._containerWidth;
+                    }
+                }
+                this._handleX = x;
+            } else {
+                var y = this._startPosition + event.translateY - this._startTranslate;
+                if (y < 0) {
+                    y = 0;
+                } else {
+                    if (y > this._sliderHeight) {
+                        y = this._sliderHeight;
+                    }
+                }
+                this._handleY = y;
+            }
         }
     },
 
     handleTranslateEnd: {
         value: function(e) {
-
         }
     },
-    */
+
 
     draw: {
         value: function() {
-            if(this.resizable) {
-
-                if(this._wrappers.length > 1) {
-                    var wrapper = this._wrappers[0];
-                    // if we provide inline width, set the webkit-flex to none
-                    //wrapper.style['-webkit-flex'] = 'none';
-                    console.log('draw  = ', this._percent);
-                    var percent = this._percent + '%';
-                    if("horizontal" === this.axis) {
-                        wrapper.style.width = percent; //this.handleX + 'px'; percent;
-                        this._wrappers[1].style.width = (100- this._percent) + '%';
-                    } else {
-                        wrapper.style.height = percent;
-                        this._wrappers[1].style.height = (100- this._percent) + '%';
-                    }
-
-                }
-
-
+            var isHorizontal = (this.axis === 'horizontal');
+            if(this._wrappers.length > 1) {
+                var wrapper = this._wrappers[0];
+                wrapper.style[isHorizontal ? 'width' : 'height'] = this.percent + '%';
+                this._wrappers[1].style[isHorizontal ? 'width' : 'height'] = (100- this.percent) + '%';
             }
+        }
+    },
 
-
+    didDraw: {
+        value: function() {
+            if(this._initialDraw && this.resizable) {
+                this._calculateInitialHandlePosition();
+                this._initializeComposer();
+            }
+            this._initialDraw = false;
         }
     }
-
 });

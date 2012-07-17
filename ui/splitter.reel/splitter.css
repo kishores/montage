@@ -39,10 +39,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 .montage-splitterRow {
     height: 100%;
+    position: relative;
 }
 
 .montage-splitterCol {
     width: 100%;
+    position: relative;
 }
 
 
@@ -126,7 +128,7 @@ POSSIBILITY OF SUCH DAMAGE.
     z-index: 2;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 30px;
+    width: 20px;
     height: 30px;
     border-radius: 30px;
     border: 1px solid hsl(0,0%,70%);

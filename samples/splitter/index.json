@@ -3,7 +3,8 @@
         "prototype": "montage/ui/splitter.reel",
         "properties": {
             "element": {"#": "row-splitter"},
-            "axis": "horizontal"
+            "axis": "horizontal",
+            "percent": 30
         }
     },
 
@@ -12,7 +13,8 @@
         "prototype": "montage/ui/splitter.reel",
         "properties": {
             "element": {"#": "col-splitter"},
-            "axis": "vertical"
+            "axis": "vertical",
+            "percent": 30
         }
     },
 
@@ -37,7 +39,8 @@
         "properties": {
             "element": {"#": "row-splitter-drag"},
             "axis": "horizontal",
-            "resizable": true
+            "resizable": true,
+            "percent": 30
         }
     },
 
@@ -56,7 +59,10 @@
         "properties": {
             "element": {"#": "nested-splitter-drag"},
             "axis": "horizontal",
-            "resizable": true
+            "resizable": true,
+            "percent": 30,
+            "maxWidth": 90,
+            "minWidth": 10
         }
     },
     
