@@ -59,7 +59,7 @@
             "resizable": true
         }
     },
-
+    
     "nestedRowSplitterDrag": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
@@ -68,45 +68,59 @@
             "resizable": true
         }
     },
-
-
-    "jsfiddleTop": {
+    
+    
+    
+    
+    "mixed": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "jsfiddle"},
-            "axis": "vertical"
-        }
-    },
-    "jsfiddleMain": {
-        "prototype": "montage/ui/splitter.reel",
-        "properties": {
-            "element": {"#": "jsfiddle-main"},
+            "element": {"#": "mixed"},
             "axis": "horizontal",
             "resizable": true
         }
     },
-    "jsfiddleCode": {
+    "mixed1": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "jsfiddle-code"},
-            "axis": "horizontal",
-            "resizable": true
-        }
-    },
-    "jsfiddleCodeCol1": {
-        "prototype": "montage/ui/splitter.reel",
-        "properties": {
-            "element": {"#": "jsfiddle-code-col1"},
+            "element": {"#": "mixed1"},
             "axis": "vertical",
             "resizable": true
         }
     },
-    "jsfiddleCodeCol2": {
+    "mixed2": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
-            "element": {"#": "jsfiddle-code-col2"},
+            "element": {"#": "mixed2"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+    "mixed21": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mixed21"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    "mixed22": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mixed22"},
+            "axis": "horizontal",
+            "resizable": true
+        }
+    },
+    "mixed222": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mixed222"},
             "axis": "vertical",
             "resizable": true
         }
     }
+    
+    
+    
 }

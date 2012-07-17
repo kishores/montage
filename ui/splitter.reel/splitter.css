@@ -37,6 +37,14 @@ POSSIBILITY OF SUCH DAMAGE.
     box-sizing: border-box;
 }
 
+.montage-splitterRow {
+    height: 100%;
+}
+
+.montage-splitterCol {
+    width: 100%;
+}
+
 
 /* Children */
 
@@ -96,11 +104,7 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Draggable ---------------------------------- */
 
 .montage-splitterDraggable > .montage-splitter-child {
-    border: 1px solid #b3b3b3;
-}
-
-.montage-splitterDraggable > .montage-splitter-child:first-child {
-    /border-right: 0;
+    border: 1px solid hsl(0,0%,70%);
 }
 
 
@@ -115,47 +119,83 @@ POSSIBILITY OF SUCH DAMAGE.
 .montage-splitter-thumb:before {
     content: "";
     position: absolute;
+    z-index: 2;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid hsl(0,0%,70%);
     background: hsl(0,0%,90%) url(splitter.svg) no-repeat;
+    
 }
 
-.montage-splitter-thumb:hover:before {
-    background-color: hsl(0,0%,85%);
+.montage-splitter-thumb:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.montage-splitter-thumb:active:before,
-.montage-splitter-thumb:-webkit-drag:before {
-    opacity: 1;
-    background-color: hsl(0,0%,90%);
-}
+
+
+/* Row thumb */
 
 .montage-splitterRow > .montage-splitter-thumb {
     display: inline-block;
     width: 0;
     height: 100%;
-    left: -11px;
     cursor: col-resize;
 }
+
 .montage-splitterRow > .montage-splitter-thumb:before {
-    width: 12px;
-    height: 100%;
-    border-left: 1px solid #b3b3b3;
-    border-right: 1px solid #b3b3b3;
-    background-position: -45px center;
+    width: 15px;
+    height: 30px;
+    margin-top: -15px;
+    left: -7px;
+    top: 50%;
+    background-position: -1px 6px;
 }
+
+.montage-splitterRow > .montage-splitter-thumb:after {
+    width: 15px;
+    height: 100%;
+    left: -7px;
+}
+
+
+/* Col thumb */
 
 .montage-splitterCol > .montage-splitter-thumb {
     display: block;
     height: 0;
-    cursor: row-resize;
-    
-}
-.montage-splitterCol > .montage-splitter-thumb:before {
-    width: 100%;
-    height: 12px;
-    top: -11px;
-    border-top: 1px solid #b3b3b3;
-    border-bottom: 1px solid #b3b3b3;
-    background-position: center -15px;
+    cursor: row-resize;    
 }
 
+.montage-splitterCol > .montage-splitter-thumb:before {
+    width: 30px;
+    height: 15px;
+    top: -7px;
+    left: 50%;
+    margin-left: -15px;
+    background-position: -8px -16px;
+}
+
+.montage-splitterCol > .montage-splitter-thumb:after {
+    width: 100%;
+    height: 15px;
+    top: -7px;
+}
+
+
+/* States */
+
+
+.montage-splitter-thumb:hover:before {
+    background-color: hsl(0,0%,95%);
+}
+
+.montage-splitter-thumb:active:before {
+    background-color: hsl(0,0%,85%);
+}
