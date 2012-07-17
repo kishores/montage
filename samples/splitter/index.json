@@ -61,11 +61,11 @@
             "axis": "horizontal",
             "resizable": true,
             "percent": 30,
-            "maxWidth": 90,
-            "minWidth": 10
+            "max": 90,
+            "min": 10
         }
     },
-    
+
     "nestedRowSplitterDrag": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
@@ -74,10 +74,7 @@
             "resizable": true
         }
     },
-    
-    
-    
-    
+
     "multiRow": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
@@ -102,9 +99,9 @@
             "resizable": true
         }
     },
-    
-    
-    
+
+
+
     "multiCol": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
@@ -129,10 +126,53 @@
             "resizable": true
         }
     },
-    
-    
-    
-    
+
+
+
+    "mfiddle": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mfiddle"},
+            "axis": "vertical",
+            "percent": "10"
+        }
+    },
+    "mfMain": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mf-main"},
+            "axis": "horizontal",
+            "resizable": true,
+            "percent": "40"
+        }
+    },
+    "mfLeft": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mf-left"},
+            "axis": "vertical",
+            "resizable": true,
+            "percent": 70
+        }
+    },
+    "mfhtml": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mf-html"},
+            "axis": "vertical",
+            "resizable": true,
+            "percent": 60
+        }
+    },
+    "mfRight": {
+        "prototype": "montage/ui/splitter.reel",
+        "properties": {
+            "element": {"#": "mf-right"},
+            "axis": "vertical",
+            "resizable": true
+        }
+    },
+
     "deep": {
         "prototype": "montage/ui/splitter.reel",
         "properties": {
@@ -181,7 +221,7 @@
             "resizable": true
         }
     }
-    
-    
-    
+
+
+
 }

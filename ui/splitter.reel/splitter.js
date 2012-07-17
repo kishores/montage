@@ -33,6 +33,10 @@ var Montage = require("montage").Montage,
 Component = require("ui/component").Component,
 TranslateComposer = require("ui/composer/translate-composer").TranslateComposer;
 
+/**
+* A Splitter is a Layout component that splits 2 elements horizontally or vertically and
+* supports resizing
+*/
 exports.Splitter = Montage.create(Component, {
 
     // Public Properties for Splitter
@@ -40,6 +44,7 @@ exports.Splitter = Montage.create(Component, {
     /** horizontal or vertical */
     _axis: {value: null},
     axis: {
+        serializable: true,
         get: function() {
             return this._axis;
         },
@@ -52,6 +57,7 @@ exports.Splitter = Montage.create(Component, {
     /* Should the Splitter provide a drag handle to resize the panel */
     _resizable: {value: null},
     resizable: {
+        serializable: true,
         get: function() {
             return this._resizable;
         },
@@ -62,35 +68,39 @@ exports.Splitter = Montage.create(Component, {
     },
 
     /**
-    * Width as a %. Number between 0 and 100
+    * Width/Height as a %. Number between 0 and 100
     */
-    minWidth: {
-        value: null
+    _min: {value: null},
+    min: {
+        serializable: true,
+        get: function() {
+            return this._min;
+        },
+        set: function(value) {
+            this._min = String.isString(value) ? parseFloat(value) : value;
+        }
     },
 
     /**
-    * Width as a %. Number between 0 and 100
+    * Width/Height as a %. Number between 0 and 100
     */
-    maxWidth: {
-        value: null
+    _max: {value: null},
+    max: {
+        serializable: true,
+        get: function() {
+            return this._max;
+        },
+        set: function(value) {
+            this._max = String.isString(value) ? parseFloat(value) : value;
+        }
     },
 
     /**
-    * Height as a %. Number between 0 and 100
+    * The percentage of the width/height taken by the first item of the splitter
     */
-    minHeight: {
-        value: null
-    },
-
-    /**
-    * Height as a %. Number between 0 and 100
-    */
-    maxHeight: {
-        value: null
-    },
-
     _percent: {value: null},
     percent: {
+        serializable: true,
         get: function() {
             return this._percent;
         },
@@ -105,7 +115,7 @@ exports.Splitter = Montage.create(Component, {
     // Private
 
     _composer: {value: null},
-    
+
     __handleX: {value: null},
     _handleX: {
         get: function() {
@@ -224,10 +234,8 @@ exports.Splitter = Montage.create(Component, {
 
     didCreate: {
         value: function() {
-            this.minWidth = this.minWidth || 20; // min = 20%
-            this.maxWidth = this.maxWidth || 80; // max = 80%
-            this.minHeight = this.minHeight || 20;
-            this.maxHeight = this.maxHeight || 80;
+            this.min = this.min || 20; // min = 20%
+            this.max = this.max || 80; // max = 80%
             this.percent = this.percent || 50;
         }
     },
@@ -259,12 +267,12 @@ exports.Splitter = Montage.create(Component, {
             this._composer.axis = this.axis || 'vertical';
 
             if(isHorizontal) {
-                this._composer.minTranslateX = ((this.minWidth/100) * this.containerWidth);
-                this._composer.maxTranslateX = (this.maxWidth/100) * this.containerWidth;
+                this._composer.minTranslateX = ((this.min/100) * this.containerWidth);
+                this._composer.maxTranslateX = (this.max/100) * this.containerWidth;
                 this._composer.translateX = this._handleX;
             } else {
-                this._composer.minTranslateY = (this.minHeight/100) * this.containerHeight;
-                this._composer.maxTranslateY = (this.maxHeight/100) * this.containerHeight;
+                this._composer.minTranslateY = (this.min/100) * this.containerHeight;
+                this._composer.maxTranslateY = (this.max/100) * this.containerHeight;
                 this._composer.translateY = this._handleY;
             }
             this._composer.load();
@@ -282,9 +290,7 @@ exports.Splitter = Montage.create(Component, {
 
     prepareForActivationEvents: {
         value: function() {
-            this._composer.addEventListener('translateStart', this, false);
-            this._composer.addEventListener('translate', this, false);
-            this._composer.addEventListener('translateEnd', this, false);
+
         }
     },
 
@@ -357,6 +363,9 @@ exports.Splitter = Montage.create(Component, {
             if(this._initialDraw && this.resizable) {
                 this._calculateInitialHandlePosition();
                 this._initializeComposer();
+                this._composer.addEventListener('translateStart', this, false);
+                this._composer.addEventListener('translate', this, false);
+                this._composer.addEventListener('translateEnd', this, false);
             }
             this._initialDraw = false;
         }
