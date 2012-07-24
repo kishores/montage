@@ -31,8 +31,8 @@ POSSIBILITY OF SUCH DAMAGE.
 /*global Element */
 /**
 	@module montage/ui/component
-    @requires montage/core/core
-    @requires montage/ui/reel
+    @requires montage
+    @requires montage/ui/template
     @requires montage/core/gate
     @requires montage/core/logger | component
     @requires montage/core/logger | drawing
@@ -60,6 +60,7 @@ var Component = exports.Component = Montage.create(Montage,/** @lends module:mon
     },
 
     templateObjects: {
+        serializable: false,
         value: null
     },
 
@@ -934,7 +935,7 @@ var Component = exports.Component = Montage.create(Montage,/** @lends module:mon
                 if (instances) {
                     instances.owner = self;
                 } else {
-                    instances = {owner: self};
+                    self.templateObjects = instances = {owner: self};
                 }
 
                 // this actually also serves as isTemplateInstantiating
@@ -1152,7 +1153,7 @@ var Component = exports.Component = Montage.create(Montage,/** @lends module:mon
             for (i = 0; (attribute = attributes[i]); i++) {
                 attributeName = attribute.nodeName;
                 if (attributeName === "id" || attributeName === "data-montage-id") {
-                    continue;
+                    value = attribute.nodeValue;
                 } else {
                     value = (template.getAttribute(attributeName) || "") + (attributeName === "style" ? "; " : " ") +
                         attribute.nodeValue;
@@ -1343,8 +1344,8 @@ var Component = exports.Component = Montage.create(Montage,/** @lends module:mon
      If the component cannot draw then it's recorded in the component's blockDrawGate that a draw was requested.<br>
      Two actions are required for a component to load:
      <ol>
-        <li><it needs an element/li>
-        <li><a draw must have been requested/li>
+        <li>it needs an element</li>
+        <li>a draw must have been requested</li>
      </ol>
      @type {Function}
      @default {Boolean} false

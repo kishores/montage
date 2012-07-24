@@ -29,39 +29,35 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
 
-.logger {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #FFF;
-  -webkit-transition-property: background-color;
-  -webkit-transition-duration: 300ms;
-  -webkit-transition-timing-function: ease-in-out;
-  -o-transition-property: background-color;
-  -o-transition-duration: 300ms;
-  -o-transition-timing-function: ease-in-out;
-  -moz-transition-property: background-color;
-  -moz-transition-duration: 300ms;
-  -moz-transition-timing-function: ease-in-out;
-  transition-property: background-color;
-  transition-duration: 300ms;
-  transition-timing-function: ease-in-out;
-}
+var parentWindow = window.opener;
 
-.logger:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
+// Let's switch to the parent application package context
+require.loadPackage(parentWindow.require.location).then(function(require) {
+    var loadInfo = window.loadInfo,
+        module = loadInfo.module,
+        name = loadInfo.name,
+        callback = loadInfo.callback;
 
-.logger h2 {
-  font-size: 1em;
-  color: #FFF;
-  margin: 0;
-}
+    // Switching the package context back to the parent application
+    window.require = require;
 
-.logger-output {
-  font-family: monospace;
-  white-space: pre;
-  padding: 0.5em;
-}
+    require.async("montage/ui/component", function(exports) {
+        require.async("montage/ui/loader.reel")
+        .then(function (exports) {
+            var mainComponent = exports["Loader"].create();
+            mainComponent.mainModule = module;
+            mainComponent.mainName = name;
+            mainComponent.element = window.document.body;
+            mainComponent.attachToParentComponent();
+            mainComponent.needsDraw = true;
 
-.logger.logger-hilight {
-  background-color: rgba(219, 205, 0, 0.7);
-}
+            if (callback) {
+                mainComponent.addEventListener("componentLoaded", function(event) {
+                    mainComponent.removeEventListener("componentLoaded", arguments.callee);
+                    callback(window, event.detail);
+                });
+            }
+        })
+        .end();
+    });
+});
