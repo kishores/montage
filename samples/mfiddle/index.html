@@ -33,7 +33,6 @@ POSSIBILITY OF SUCH DAMAGE.
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Motorola Mobility - MFiddle</title>
-    <link rel="stylesheet" href="mfiddle.css">
     <script src="../../montage.js" data-auto-package></script>
     <script type="text/montage-serialization">{
         "owner": {
@@ -121,64 +120,47 @@ POSSIBILITY OF SUCH DAMAGE.
             }
         },
 
-        "components": {
-            "prototype": "montage/ui/repetition.reel",
+        "mfiddle": {
+            "prototype": "montage/ui/splitter.reel",
             "properties": {
-                "element": {"#": "components"}
-            },
-            "bindings": {
-                "objects": {"<-": "@owner.components"}
+                "element": {"#": "mfiddle"},
+                "axis": "vertical",
+                "percent": "10"
             }
         },
-
-        "componentButton": {
-            "prototype": "ui/component-button.reel",
+        "mfMain": {
+            "prototype": "montage/ui/splitter.reel",
             "properties": {
-                "element": {"#": "componentButton"}
-            },
-            "bindings": {
-                "component": {"<-": "@components.objectAtCurrentIteration"}
+                "element": {"#": "mf-main"},
+                "axis": "horizontal",
+                "resizable": true,
+                "percent": "40"
             }
         },
-
-        "save": {
-            "prototype": "montage/ui/button.reel",
+        "mfLeft": {
+            "prototype": "montage/ui/splitter.reel",
             "properties": {
-                "element": {"#": "save"}
+                "element": {"#": "mf-left"},
+                "axis": "vertical",
+                "resizable": true,
+                "percent": 70
             }
         },
-
-        "new": {
-            "prototype": "montage/ui/button.reel",
+        "mfhtml": {
+            "prototype": "montage/ui/splitter.reel",
             "properties": {
-                "element": {"#": "new"}
+                "element": {"#": "mf-html"},
+                "axis": "vertical",
+                "resizable": true,
+                "percent": 60
             }
         },
-
-        "run": {
-            "prototype": "montage/ui/button.reel",
+        "mfRight": {
+            "prototype": "montage/ui/splitter.reel",
             "properties": {
-                "element": {"#": "run"}
-            }
-        },
-
-        "examples": {
-            "prototype": "montage/ui/repetition.reel",
-            "properties": {
-                "element": {"#": "examples"}
-            },
-            "bindings": {
-                "objects": {"<-": "@owner.examples"}
-            }
-        },
-
-        "exampleButton": {
-            "prototype": "ui/example-button.reel",
-            "properties": {
-                "element": {"#": "exampleButton"}
-            },
-            "bindings": {
-                "example": {"<-": "@examples.objectAtCurrentIteration"}
+                "element": {"#": "mf-right"},
+                "axis": "vertical",
+                "resizable": true
             }
         },
 
@@ -187,58 +169,53 @@ POSSIBILITY OF SUCH DAMAGE.
             "properties": {
                 "element": {"#": "montageFrame"}
             }
-        },
-
-        "logger": {
-            "prototype": "ui/logger.reel",
-            "properties": {
-                "element": {"#": "logger"}
-            },
-            "bindings": {
-                "input": {"<-": "@montageFrame.logMessages"}
-            }
         }
     }</script>
+    <style>
+        .CodeMirror-scroll {
+            height: 220px;
+        }
+    </style>
 </head>
 <body data-montage-id="body">
-    <div id="header">
-        <h1 id="logo">MFiddle</h1>
-        <ul id="components" data-montage-id="components">
-            <li>
-                <div class="component-button-holder"><div data-montage-id="componentButton"></div></div>
-            </li>
-        </ul>
-        <ul id="menu">
-            <li><div class="menu-button" data-montage-id="save">Save</div></li>
-            <li><div class="menu-button" data-montage-id="new">New</div></li>
-            <li><div id="run" class="menu-button" data-montage-id="run">Run</div></li>
-            <li>
-                <div id="examples">
-                    <h2>Examples</h2>
-                    <ul data-montage-id="examples">
-                        <li><span data-montage-id="exampleButton"></span></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div id="css" data-montage-id="css">
-        <div data-montage-id="cssCodeMirror"></div>
-    </div>
-    <div id="serialization" data-montage-id="serialization">
-        <div data-montage-id="serializationCodeMirror"></div>
-    </div>
-    <div id="html" data-montage-id="html">
-        <div data-montage-id="htmlCodeMirror"></div>
-    </div>
-    <div id="javascript" data-montage-id="javascript">
-        <div data-montage-id="javascriptCodeMirror"></div>
-    </div>
-    <div id="preview" data-montage-id="preview">
-        <div id="iframe-wrapper">
-            <div data-montage-id="montageFrame"></div>
-        </div>
-        <div id="logger" data-montage-id="logger"></div>
-    </div>
+
+    <h3>MFiddle</h3>
+
+    <section data-montage-id="mfiddle" style="height: 800px;">
+        <nav>
+            Navigation
+        </nav>
+        <section data-montage-id="mf-main">
+            <section data-montage-id="mf-left">
+                <section data-montage-id="mf-html">
+                    <section data-montage-id="markup">
+                        <div id="html" data-montage-id="html">
+                            <div data-montage-id="htmlCodeMirror"></div>
+                        </div>
+                    </section>
+                    <section data-montage-id="ser">
+                        <div id="serialization" data-montage-id="serialization">
+                            <div data-montage-id="serializationCodeMirror"></div>
+                        </div>
+                    </section>
+                </section>
+                <section data-montage-id="css">
+                    <div id="css" data-montage-id="css">
+                        <div data-montage-id="cssCodeMirror"></div>
+                    </div>
+                </section>
+            </section>
+            <section data-montage-id="mf-right">
+                <section data-montage-id="js">
+                    <div id="javascript" data-montage-id="javascript">
+                        <div data-montage-id="javascriptCodeMirror"></div>
+                    </div>
+                </section>
+                <section data-montage-id="result">
+                    <div data-montage-id="montageFrame"></div>
+                </section>
+            </section>
+        </section>
+    </section>
 <body>
 </html>
